@@ -1,29 +1,38 @@
-/* --- Default Theme: Dark Mode (Catppuccin Mocha Mauve) --- */
+/* ==================================================
+   1. Theme Variables
+   --------------------------------------------------
+   Dark Mode (Default: Catppuccin Mocha Mauve)
+================================================== */
 :root {
   --primary-color: #cba6f7; /* Mauve */
   --secondary-color: #eba0ac; /* Maroon-ish */
-  --accent-color: #cba6f7; /* Default accent: Mauve */
-  --bg-color: #1e1e2e; /* Base dark background */
-  --mantle: #181825;
+  --accent-color: #cba6f7; /* Mauve accent */
+  --bg-color: #1e1e2e; /* Deep dark background */
+  --mantle: #181825; /* Darker nav/footer */
   --surface0: #313244; /* Container background */
   --text-color: #cdd6f4; /* Light text */
   --overlay-color: #6c7086;
   --transition-duration: 0.3s;
 }
 
-/* Light Mode Variables (will be set dynamically) */
+/* ==================================================
+   Light Mode Variables (Overrides when body.light-mode)
+   (Inspired by a Catppuccin Latte-like palette)
+================================================== */
 body.light-mode {
-  --primary-color: #cba6f7; /* You can allow the user to override this */
-  --secondary-color: #eba0ac;
-  --accent-color: #cba6f7;
-  --bg-color: #f5e0dc; /* A soft Rosewater */
-  --mantle: #f2cdcd;
-  --surface0: #f5c2e7;
-  --text-color: #1e1e2e; /* Dark text for light mode */
-  --overlay-color: #a6adc8;
+  --primary-color: #7e9cd8; /* Soft blue */
+  --secondary-color: #d08770; /* Warm, muted orange */
+  --accent-color: #a3be8c; /* Subtle green accent */
+  --bg-color: #eff1f5; /* Very light gray */
+  --mantle: #e5e9f0; /* Off white for nav/footer */
+  --surface0: #eceff4; /* Container background */
+  --text-color: #2e3440; /* Dark slate text */
+  --overlay-color: #d8dee9;
 }
 
-/* Global Styles */
+/* ==================================================
+   2. Global Styles
+================================================== */
 * {
   box-sizing: border-box;
 }
@@ -36,7 +45,24 @@ body {
   line-height: 1.6;
 }
 
-/* Navbar */
+/* Ensure text elements use our color variables */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label,
+input,
+select,
+button {
+  color: var(--text-color) !important;
+}
+
+/* ==================================================
+   4. Navbar
+================================================== */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -45,6 +71,16 @@ body {
   padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
+
+/* Override Bootstrap’s default colors in light mode */
+body.light-mode .navbar {
+  background-color: var(--mantle) !important;
+}
+body.light-mode .navbar .navbar-brand,
+body.light-mode .navbar .nav-link {
+  color: var(--primary-color) !important;
+}
+
 .nav-logo {
   color: var(--primary-color);
   font-size: 1.5em;
@@ -69,7 +105,9 @@ body {
   color: var(--accent-color);
 }
 
-/* Theme Controls */
+/* ==================================================
+   5. Theme Controls
+================================================== */
 .theme-controls {
   text-align: center;
   margin: 10px 0;
@@ -77,6 +115,7 @@ body {
 .theme-controls label {
   margin-right: 5px;
   font-weight: 500;
+  color: var(--overlay-color);
 }
 .theme-controls select {
   padding: 5px;
@@ -87,7 +126,9 @@ body {
   color: var(--text-color);
 }
 
-/* Container */
+/* ==================================================
+   6. Container & Fade In Animation
+================================================== */
 .container {
   max-width: 480px;
   margin: 40px auto;
@@ -97,8 +138,6 @@ body {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
   animation: fadeIn 0.5s ease-in;
 }
-
-/* Fade In Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -109,8 +148,6 @@ body {
     transform: translateY(0);
   }
 }
-
-/* Headings */
 .container h1,
 .container h2,
 .container h3 {
@@ -118,7 +155,9 @@ body {
   color: var(--primary-color);
 }
 
-/* Form Groups */
+/* ==================================================
+   7. Form Groups
+================================================== */
 .form-group {
   margin-bottom: 15px;
 }
@@ -144,11 +183,12 @@ body {
   outline: none;
 }
 
-/* Buttons */
+/* ==================================================
+   8. Buttons with Animations & Ripple Effect
+================================================== */
 .btn {
-  display: block;
-  width: 100%;
-  padding: 12px;
+  display: inline-block;
+  padding: 12px 20px;
   background-color: var(--primary-color);
   border: none;
   border-radius: 4px;
@@ -156,24 +196,64 @@ body {
   font-size: 18px;
   cursor: pointer;
   transition: background-color var(--transition-duration) ease,
-    transform 0.2s ease;
+    transform 0.2s ease, box-shadow 0.2s ease;
   text-align: center;
   text-decoration: none;
-  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
 }
-.btn:hover {
+.btn:hover,
+.btn:focus {
   background-color: var(--accent-color);
-  transform: scale(1.02);
+  transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 .btn-secondary {
   background-color: var(--secondary-color);
-  margin-top: 20px;
+  color: var(--bg-color);
 }
-.btn-secondary:hover {
+.btn-secondary:hover,
+.btn-secondary:focus {
   background-color: var(--accent-color);
 }
 
-/* Cards for About Page */
+/* Ripple animation on button click */
+@keyframes ripple {
+  from {
+    opacity: 0.5;
+    transform: scale(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+.btn::after {
+  content: "";
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0);
+}
+.btn:active::after {
+  top: var(--ripple-y, 50%);
+  left: var(--ripple-x, 50%);
+  opacity: 1;
+  transform: scale(2);
+  animation: ripple 0.6s linear;
+}
+
+/* ==================================================
+   9. Cards for About Page
+================================================== */
 .about-container {
   text-align: center;
 }
@@ -210,7 +290,7 @@ body {
 }
 .card-content p {
   font-size: 0.9em;
-  color: var(--subtext1);
+  color: var(--overlay-color);
   margin-bottom: 15px;
 }
 .card-links a {
@@ -223,7 +303,9 @@ body {
   color: var(--accent-color);
 }
 
-/* Chart */
+/* ==================================================
+   10. Chart
+================================================== */
 .chart {
   text-align: center;
   margin: 20px 0;
@@ -234,10 +316,12 @@ body {
   border-radius: 4px;
 }
 
-/* Footer */
+/* ==================================================
+   11. Footer
+================================================== */
 footer {
   text-align: center;
-  padding: 1px;
+  padding: 2px;
   background: var(--mantle);
   color: var(--primary-color);
   position: fixed;
@@ -249,8 +333,18 @@ footer a {
   text-decoration: none;
   font-weight: bold;
 }
+/* In light mode, ensure the footer and its links look correct */
+body.light-mode footer {
+  background: var(--mantle) !important;
+  color: var(--primary-color) !important;
+}
+body.light-mode footer a {
+  color: var(--accent-color) !important;
+}
 
-/* Loading Modal */
+/* ==================================================
+   12. Loading Modal & Spinner
+================================================== */
 .loading-modal {
   position: fixed;
   top: 0;
@@ -263,8 +357,6 @@ footer a {
   justify-content: center;
   align-items: center;
 }
-
-/* Spinner Styles */
 .spinner {
   width: 60px;
   height: 60px;
@@ -273,7 +365,6 @@ footer a {
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
-
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -283,7 +374,9 @@ footer a {
   }
 }
 
-/* Responsive */
+/* ==================================================
+   13. Responsive Adjustments
+================================================== */
 @media (max-width: 500px) {
   .container {
     margin: 20px;

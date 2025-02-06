@@ -42,6 +42,7 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <!-- Inline CSS for animated background -->
   </head>
   <body>
     <header>
@@ -84,14 +85,6 @@
         <select id="theme-mode">
           <option value="dark" selected>Dark</option>
           <option value="light">Light</option>
-        </select>
-        <label for="accent-color">Accent:</label>
-        <select id="accent-color">
-          <option value="#cba6f7" selected>Mauve</option>
-          <option value="#a6e3a1">Green</option>
-          <option value="#94e2d5">Teal</option>
-          <option value="#89b4fa">Blue</option>
-          <option value="#f38ba8">Red</option>
         </select>
       </div>
     </header>
@@ -213,7 +206,7 @@
               {% endfor %}
             </select>
           </div>
-          <button type="submit" class="btn">
+          <button type="submit" class="btn btn-primary">
             <i class="fas fa-paper-plane"></i> Predict
           </button>
         </form>

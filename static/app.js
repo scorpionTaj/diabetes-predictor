@@ -1,34 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const currentTheme = localStorage.getItem("theme") || "dark";
-  document.body.classList.toggle("light-mode", currentTheme === "light");
-
-  // When the theme control is changed:
-  document.getElementById("theme-mode").addEventListener("change", (e) => {
-    const theme = e.target.value;
-    if (theme === "light") {
+  // Theme mode toggle (already implemented)
+  const themeModeEl = document.getElementById("theme-mode");
+  themeModeEl.addEventListener("change", (e) => {
+    const mode = e.target.value;
+    if (mode === "light") {
       document.body.classList.add("light-mode");
     } else {
       document.body.classList.remove("light-mode");
     }
-    localStorage.setItem("theme", theme);
+    localStorage.setItem("theme", mode);
   });
-
-  // Also update the accent color selection if needed:
-  document.getElementById("accent-color").addEventListener("change", (e) => {
-    const accent = e.target.value;
-    document.documentElement.style.setProperty("--primary-color", accent);
-    document.documentElement.style.setProperty("--accent-color", accent);
-    // Save preference if needed:
-    localStorage.setItem("accent", accent);
-  });
-
-  // On page load, if an accent is saved, apply it.
-  const savedAccent = localStorage.getItem("accent");
-  if (savedAccent) {
-    document.documentElement.style.setProperty("--primary-color", savedAccent);
-    document.documentElement.style.setProperty("--accent-color", savedAccent);
-    document.getElementById("accent-color").value = savedAccent;
-  }
 
   // Handle form submission to show loading spinner
   const form = document.querySelector("form");
@@ -76,3 +57,14 @@ if ("serviceWorker" in navigator) {
     );
   });
 }
+
+document.querySelectorAll(".btn").forEach((btn) => {
+  btn.addEventListener("click", function (e) {
+    const rect = btn.getBoundingClientRect();
+    // Calculate click position relative to the button
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    btn.style.setProperty("--ripple-x", x + "px");
+    btn.style.setProperty("--ripple-y", y + "px");
+  });
+});

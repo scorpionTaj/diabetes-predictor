@@ -125,7 +125,7 @@ your_project/
 
 3. **Theme Customization:**
 
-   Use the theme controls (located in the header) to switch between dark and light modes and to choose your preferred accent color.
+   Use the theme controls (located in the header) to switch between dark and light modes .
 
 4. **Submit and Get Prediction:**
 
@@ -143,8 +143,6 @@ your_project/
 
 - **Mode:**  
   Users can toggle between **Dark** (default) and **Light** mode.
-- **Accent Color:**  
-  Options include Mauve (default), Green, Teal, Blue, and Red.
 - **Persistence:**  
   The app saves your theme preferences using `localStorage` so that they persist across page reloads.
 
@@ -232,6 +230,6 @@ The About page displays interactive developer cards with:
 - **Smooth Transitions & Spinner:**  
   Smooth page transitions and a loading spinner/modal improve user experience during navigation and form submission.
 - **Theme Customization:**  
-  Users can toggle between dark/light modes and choose their accent color, with preferences saved across sessions.
+  Users can toggle between dark/light modes , with preferences saved across sessions.
 - **Documentation:**  
   This README provides a comprehensive guide to the project, including setup, usage, and troubleshooting.

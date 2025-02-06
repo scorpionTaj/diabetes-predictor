@@ -335,6 +335,7 @@ def predict():
             result=result_text,
             prob_msg=prob_msg,
             model=selected_model_name,
+            probability=probability or 0,
         )
 
     except Exception as e:

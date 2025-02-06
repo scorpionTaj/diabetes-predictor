@@ -221,7 +221,7 @@ The About page displays interactive developer cards with:
 
 ## License
 
-MIT License[](MIT)
+[MIT License](LICENCE)
 
 ---
 

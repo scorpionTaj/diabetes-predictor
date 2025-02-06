@@ -306,20 +306,7 @@ def predict():
         # ------------------------------
         # 8. Generate a Confidence Chart
         # ------------------------------
-        plt.figure(figsize=(5, 3))
-        if probability is not None:
-            plt.bar(
-                ["Not Diabetic", "Diabetic"],
-                [1 - probability, probability],
-                color=["green", "red"],
-            )
-            plt.ylim([0, 1])
-            plt.ylabel("Confidence Level")
-        else:
-            plt.text(0.5, 0.5, "No Probability Available", horizontalalignment="center")
-        chart_path = os.path.join("static", "probability_chart.png")
-        plt.savefig(chart_path)
-        plt.close()
+        # No need to save the plot, just render it in the template
 
         # ------------------------------
         # 9. Render the Result Template

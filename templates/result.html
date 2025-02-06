@@ -80,12 +80,16 @@
         <p><strong>Selected Model:</strong> {{ model }}</p>
         <p><strong>Prediction:</strong> {{ result }}</p>
         <p><strong>{{ prob_msg }}</strong></p>
-        <div class="chart">
-          <h3>Prediction Confidence</h3>
-          <img
-            src="{{ url_for('static', filename='probability_chart.png') }}"
-            alt="Probability Chart"
-          />
+        <!-- Chart.js Confidence Chart -->
+        <div class="chart-container my-5">
+          <h3 class="text-center">Prediction Confidence</h3>
+          <canvas id="confidenceChart"></canvas>
+          <!-- Download button -->
+          <div class="text-center mt-3">
+            <button id="downloadChart" class="btn btn-primary">
+              Save Chart as Image
+            </button>
+          </div>
         </div>
         <a href="/" class="btn btn-secondary"
           ><i class="fas fa-undo"></i> Go Back</a
@@ -105,5 +109,89 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+Pn1F9cjPVBw7f0rV7TQK6bS5fN9I"
       crossorigin="anonymous"
     ></script>
+
+    <!-- Load Chart.js with defer so that it’s parsed before your inline script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script defer>
+        document.addEventListener("DOMContentLoaded", () => {
+          // Retrieve the canvas context
+          const canvas = document.getElementById("confidenceChart");
+          const ctx = canvas.getContext("2d");
+
+          // Chart configuration
+          const probability = {{ probability | default(0) }};
+          const primaryColor = "rgba(203,166,247, 0.6)"; // for bars
+          const primaryBorder = "rgba(203,166,247, 1)";
+          const secondaryColor = "rgba(235,160,172, 0.6)"; // if you want a contrasting color
+          const secondaryBorder = "rgba(235,160,172, 1)";
+          const data = {
+            labels: ["Not Diabetic", "Diabetic"],
+            datasets: [{
+              label: "Confidence Level",
+              data: [1 - probability, probability],
+              backgroundColor: [
+                primaryColor,
+                secondaryColor
+              ],
+              borderColor: [
+                primaryBorder,
+                secondaryBorder
+              ],
+              borderWidth: 1
+            }]
+          };
+
+          const config = {
+            type: "bar",
+            data: data,
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: true, position: "top" },
+                tooltip: {
+                  callbacks: {
+                    label: function(context) {
+                      const value = context.parsed.y;
+                      return context.dataset.label + ": " + (value * 100).toFixed(2) + "%";
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 1,
+                  ticks: {
+                    callback: value => (value * 100) + "%"
+                  },
+                  title: { display: true, text: "Confidence" }
+                }
+              }
+            }
+          };
+
+          // Create the Chart.js instance and store it in a variable
+          const chartInstance = new Chart(ctx, config);
+          // Optionally, attach it to window for debugging:
+          window.confidenceChart = chartInstance;
+
+
+          // Add event listener to the download button
+          document.getElementById("downloadChart").addEventListener("click", () => {
+            console.log("Chart instance:", confidenceChart);
+            if (typeof confidenceChart.toBase64Image === "function") {
+                const imageURL = confidenceChart.toBase64Image();
+                const link = document.createElement("a");
+                link.href = imageURL;
+                link.download = "confidence-chart.png";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              } else {
+                console.error("toBase64Image() is not available on confidenceChart. Check your Chart.js version and instance assignment.");
+              }
+          });
+      });
+    </script>
   </body>
 </html>

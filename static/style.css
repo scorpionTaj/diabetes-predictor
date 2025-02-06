@@ -13,8 +13,10 @@
 
 /* Light Mode Variables (will be set dynamically) */
 body.light-mode {
-  --primary-color: #cba6f7; /* This may be overridden by user accent choice */
-  --bg-color: #f5e0dc; /* Using Rosewater as light background */
+  --primary-color: #cba6f7; /* You can allow the user to override this */
+  --secondary-color: #eba0ac;
+  --accent-color: #cba6f7;
+  --bg-color: #f5e0dc; /* A soft Rosewater */
   --mantle: #f2cdcd;
   --surface0: #f5c2e7;
   --text-color: #1e1e2e; /* Dark text for light mode */

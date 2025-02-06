@@ -174,7 +174,7 @@ expected_features = [
 @app.route("/")
 def home():
     # Include auto-select option with value "best"
-    return render_template("index.html", models=["best"] + model_names)
+    return render_template("index.html", models=model_names)
 
 
 @app.route("/about")

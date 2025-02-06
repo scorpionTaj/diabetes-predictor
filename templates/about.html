@@ -38,104 +38,142 @@
   </head>
   <body>
     <header>
-      <nav class="navbar">
-        <div class="nav-logo">
-          <i class="fas fa-heartbeat"></i> Diabetes Predictor
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+          <a class="navbar-brand" href="/"
+            ><i class="fas fa-heartbeat"></i> Diabetes Predictor</a
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/"
+                  ><i class="fa-solid fa-house"></i> Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/about"
+                  ><i class="fas fa-info-circle"></i> About</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
-        <ul class="nav-links">
-          <li>
-            <a href="/"><i class="fa-solid fa-house"></i> Home</a>
-          </li>
-          <li>
-            <a href="/about"><i class="fas fa-info-circle"></i> About</a>
-          </li>
-        </ul>
       </nav>
     </header>
 
     <main>
-      <div class="container about-container">
-        <h2>About the Developers</h2>
+      <div class="container py-5">
+        <h2 class="mb-4">About the Developers</h2>
         <p>
           This application was developed by <strong>TAN Team</strong> as a proof
           of concept for predicting diabetes risk using state-of-the-art machine
           learning techniques.
         </p>
-
-        <div class="cards">
+        <div class="row">
           <!-- Developer 1 Card -->
-          <div class="card">
-            <img
-              src="{{ url_for('static', filename='images/dev1.jpg') }}"
-              alt="Developer 1 Photo"
-              class="card-img"
-              loading="lazy"
-            />
-            <div class="card-content">
-              <h3>Tajeddine Bourhim</h3>
-              <p>Data Scientist & Artificial intelligence Student</p>
-              <div class="card-links">
-                <a href="https://github.com/scorpionTaj" target="_blank"
+          <div class="col-md-4 mb-4">
+            <div class="card h-100">
+              <img
+                src="{{ url_for('static', filename='images/dev1.jpg') }}"
+                class="card-img-top"
+                alt="Developer 1 Photo"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Tajeddine Bourhim</h5>
+                <p class="card-text">
+                  Data Scientist & Artificial Intelligence Student
+                </p>
+              </div>
+              <div class="card-footer">
+                <a
+                  href="https://github.com/scorpionTaj"
+                  target="_blank"
+                  class="btn btn-outline-primary btn-sm"
                   ><i class="fab fa-github"></i
                 ></a>
                 <a
                   href="https://www.linkedin.com/in/tajeddine-bourhim"
                   target="_blank"
+                  class="btn btn-outline-primary btn-sm"
                   ><i class="fab fa-linkedin"></i
                 ></a>
               </div>
             </div>
           </div>
-
           <!-- Developer 2 Card -->
-          <div class="card">
-            <img
-              src="{{ url_for('static', filename='images/dev2.jpg') }}"
-              alt="Developer 2 Photo"
-              class="card-img"
-              loading="lazy"
-            />
-            <div class="card-content">
-              <h3>Anas Zbir</h3>
-              <p>Data Scientist & Artificial intelligence Student</p>
-              <div class="card-links">
-                <a href="https://github.com/ana3ss7z" target="_blank"
+          <div class="col-md-4 mb-4">
+            <div class="card h-100">
+              <img
+                src="{{ url_for('static', filename='images/dev2.jpg') }}"
+                class="card-img-top"
+                alt="Developer 2 Photo"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Anas Zbir</h5>
+                <p class="card-text">
+                  Data Scientist & Artificial Intelligence Student
+                </p>
+              </div>
+              <div class="card-footer">
+                <a
+                  href="https://github.com/ana3ss7z"
+                  target="_blank"
+                  class="btn btn-outline-primary btn-sm"
                   ><i class="fab fa-github"></i
                 ></a>
                 <a
                   href="https://www.linkedin.com/in/anass-zbir-2b17a526b"
                   target="_blank"
+                  class="btn btn-outline-primary btn-sm"
                   ><i class="fab fa-linkedin"></i
                 ></a>
               </div>
             </div>
           </div>
-
           <!-- Developer 3 Card -->
-          <div class="card">
-            <img
-              src="{{ url_for('static', filename='images/dev3.jpg') }}"
-              alt="Developer 3 Photo"
-              class="card-img"
-              loading="lazy"
-            />
-            <div class="card-content">
-              <h3>Nawfal Khallou</h3>
-              <p>Data Scientist & Artificial intelligence Student</p>
-              <div class="card-links">
-                <a href="https://github.com/developer3" target="_blank"
+          <div class="col-md-4 mb-4">
+            <div class="card h-100">
+              <img
+                src="{{ url_for('static', filename='images/dev3.jpg') }}"
+                class="card-img-top"
+                alt="Developer 3 Photo"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Nawfal Khallou</h5>
+                <p class="card-text">
+                  Data Scientist & Artificial Intelligence Student
+                </p>
+              </div>
+              <div class="card-footer">
+                <a
+                  href="https://github.com/nawfal-khallou"
+                  target="_blank"
+                  class="btn btn-outline-primary btn-sm"
                   ><i class="fab fa-github"></i
                 ></a>
-                <a href="https://www.linkedin.com/in/developer3" target="_blank"
+                <a
+                  href="https://www.linkedin.com/in/nawfal-khallou"
+                  target="_blank"
+                  class="btn btn-outline-primary btn-sm"
                   ><i class="fab fa-linkedin"></i
                 ></a>
               </div>
             </div>
           </div>
         </div>
-
         <a href="/" class="btn btn-secondary"
-          ><i class="fas fa-home"></i> Home</a
+          ><i class="fas fa-house"></i> Home</a
         >
       </div>
     </main>

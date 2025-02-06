@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diabetes Prediction</title>
+    <link
+      rel="manifest"
+      href="{{ url_for('static', filename='manifest.json') }}"
+    />
+    <meta name="theme-color" content="#cba6f7" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="128x128"
+      href="{{ url_for('static', filename='images/icon-128.png') }}"
+    />
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Link to your custom stylesheet -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='gen/packed.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-logo">
+          <i class="fas fa-heartbeat"></i> Diabetes Predictor
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+          </li>
+          <li>
+            <a href="/about"><i class="fas fa-info-circle"></i> About</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- Theme control panel -->
+      <div class="theme-controls">
+        <label for="theme-mode">Mode:</label>
+        <select id="theme-mode">
+          <option value="dark" selected>Dark</option>
+          <option value="light">Light</option>
+        </select>
+        <label for="accent-color">Accent:</label>
+        <select id="accent-color">
+          <option value="#cba6f7" selected>Mauve</option>
+          <option value="#a6e3a1">Green</option>
+          <option value="#94e2d5">Teal</option>
+          <option value="#89b4fa">Blue</option>
+          <option value="#f38ba8">Red</option>
+        </select>
+      </div>
+    </header>
+
+    <!-- Loading Spinner Modal -->
+    <div id="loading-modal" class="loading-modal" style="display: none">
+      <div class="spinner"></div>
+    </div>
+
+    <main>
+      <div class="container">
+        <h1>Diabetes Prediction</h1>
+        <form action="/predict" method="post">
+          <!-- Input fields for features -->
+          <div class="form-group">
+            <label for="Pregnancies"
+              ><i class="fas fa-user-friends"></i> Pregnancies</label
+            >
+            <input
+              type="number"
+              id="Pregnancies"
+              name="Pregnancies"
+              step="1"
+              placeholder="Enter number of pregnancies"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="Glucose"><i class="fas fa-tint"></i> Glucose</label>
+            <input
+              type="number"
+              id="Glucose"
+              name="Glucose"
+              step="0.1"
+              placeholder="Enter glucose level"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="BloodPressure"
+              ><i class="fas fa-heartbeat"></i> Blood Pressure</label
+            >
+            <input
+              type="number"
+              id="BloodPressure"
+              name="BloodPressure"
+              step="0.1"
+              placeholder="Enter blood pressure"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="SkinThickness"
+              ><i class="fas fa-ruler-combined"></i> Skin Thickness</label
+            >
+            <input
+              type="number"
+              id="SkinThickness"
+              name="SkinThickness"
+              step="0.1"
+              placeholder="Enter skin thickness"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="Insulin"><i class="fas fa-syringe"></i> Insulin</label>
+            <input
+              type="number"
+              id="Insulin"
+              name="Insulin"
+              step="0.1"
+              placeholder="Enter insulin level"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="BMI"><i class="fas fa-weight"></i> BMI</label>
+            <input
+              type="number"
+              id="BMI"
+              name="BMI"
+              step="0.1"
+              placeholder="Enter BMI"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="DiabetesPedigreeFunction"
+              ><i class="fas fa-project-diagram"></i> Diabetes Pedigree
+              Function</label
+            >
+            <input
+              type="number"
+              id="DiabetesPedigreeFunction"
+              name="DiabetesPedigreeFunction"
+              step="0.01"
+              placeholder="Enter pedigree function"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="Age"><i class="fas fa-user"></i> Age</label>
+            <input
+              type="number"
+              id="Age"
+              name="Age"
+              step="1"
+              placeholder="Enter your age"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="model"><i class="fas fa-cogs"></i> Choose Model</label>
+            <select id="model" name="model" required>
+              <!-- Auto-select option value is "best" -->
+              <option value="best">Auto-select Best Model</option>
+              {% for model in models %}
+              <option value="{{ model }}">{{ model }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button type="submit" class="btn">
+            <i class="fas fa-paper-plane"></i> Predict
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Diabetes Predictor. Developed by
+        <a href="/about">TAN Team</a>.
+      </p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='gen/packed.js') }}"></script>
+  </body>
+</html>

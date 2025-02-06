@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us</title>
+    <link
+      rel="manifest"
+      href="{{ url_for('static', filename='manifest.json') }}"
+    />
+    <meta name="theme-color" content="#cba6f7" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="128x128"
+      href="{{ url_for('static', filename='images/icon-128.png') }}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='gen/packed.css') }}"
+    />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="nav-logo">
+          <i class="fas fa-heartbeat"></i> Diabetes Predictor
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+          </li>
+          <li>
+            <a href="/about"><i class="fas fa-info-circle"></i> About</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="container about-container">
+        <h2>About the Developers</h2>
+        <p>
+          This application was developed by <strong>TAN Team</strong> as a proof
+          of concept for predicting diabetes risk using state-of-the-art machine
+          learning techniques.
+        </p>
+
+        <div class="cards">
+          <!-- Developer 1 Card -->
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='images/dev1.jpg') }}"
+              alt="Developer 1 Photo"
+              class="card-img"
+              loading="lazy"
+            />
+            <div class="card-content">
+              <h3>Tajeddine Bourhim</h3>
+              <p>Data Scientist & Artificial intelligence Student</p>
+              <div class="card-links">
+                <a href="https://github.com/scorpionTaj" target="_blank"
+                  ><i class="fab fa-github"></i
+                ></a>
+                <a
+                  href="https://www.linkedin.com/in/tajeddine-bourhim"
+                  target="_blank"
+                  ><i class="fab fa-linkedin"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Developer 2 Card -->
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='images/dev2.jpg') }}"
+              alt="Developer 2 Photo"
+              class="card-img"
+              loading="lazy"
+            />
+            <div class="card-content">
+              <h3>Anas Zbir</h3>
+              <p>Data Scientist & Artificial intelligence Student</p>
+              <div class="card-links">
+                <a href="https://github.com/ana3ss7z" target="_blank"
+                  ><i class="fab fa-github"></i
+                ></a>
+                <a
+                  href="https://www.linkedin.com/in/anass-zbir-2b17a526b"
+                  target="_blank"
+                  ><i class="fab fa-linkedin"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Developer 3 Card -->
+          <div class="card">
+            <img
+              src="{{ url_for('static', filename='images/dev3.jpg') }}"
+              alt="Developer 3 Photo"
+              class="card-img"
+              loading="lazy"
+            />
+            <div class="card-content">
+              <h3>Nawfal Khallou</h3>
+              <p>Data Scientist & Artificial intelligence Student</p>
+              <div class="card-links">
+                <a href="https://github.com/developer3" target="_blank"
+                  ><i class="fab fa-github"></i
+                ></a>
+                <a href="https://www.linkedin.com/in/developer3" target="_blank"
+                  ><i class="fab fa-linkedin"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="/" class="btn btn-secondary"
+          ><i class="fas fa-home"></i> Home</a
+        >
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 Diabetes Predictor. Developed by
+        <a href="/about">TAN Team</a>.
+      </p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='gen/packed.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+Flask
+Flask-Assets
+numpy
+pandas
+scikit-learn
+seaborn
+xgboost
+jsmin
+cssmin
+gunicorn

@@ -1,0 +1,294 @@
+/* --- Default Theme: Dark Mode (Catppuccin Mocha Mauve) --- */
+:root {
+  --primary-color: #cba6f7; /* Mauve */
+  --secondary-color: #eba0ac; /* Maroon-ish */
+  --accent-color: #cba6f7; /* Default accent: Mauve */
+  --bg-color: #1e1e2e; /* Base dark background */
+  --mantle: #181825;
+  --surface0: #313244; /* Container background */
+  --text-color: #cdd6f4; /* Light text */
+  --overlay-color: #6c7086;
+  --transition-duration: 0.3s;
+}
+
+/* Light Mode Variables (will be set dynamically) */
+body.light-mode {
+  --primary-color: #cba6f7; /* This may be overridden by user accent choice */
+  --bg-color: #f5e0dc; /* Using Rosewater as light background */
+  --mantle: #f2cdcd;
+  --surface0: #f5c2e7;
+  --text-color: #1e1e2e; /* Dark text for light mode */
+  --overlay-color: #a6adc8;
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--mantle);
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+.nav-logo {
+  color: var(--primary-color);
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+}
+.nav-logo i {
+  margin-right: 8px;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+.nav-links li a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-duration) ease;
+}
+.nav-links li a:hover {
+  color: var(--accent-color);
+}
+
+/* Theme Controls */
+.theme-controls {
+  text-align: center;
+  margin: 10px 0;
+}
+.theme-controls label {
+  margin-right: 5px;
+  font-weight: 500;
+}
+.theme-controls select {
+  padding: 5px;
+  margin-right: 15px;
+  border: 1px solid var(--overlay-color);
+  border-radius: 4px;
+  background: var(--surface0);
+  color: var(--text-color);
+}
+
+/* Container */
+.container {
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 30px;
+  background: var(--surface0);
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Headings */
+.container h1,
+.container h2,
+.container h3 {
+  text-align: center;
+  color: var(--primary-color);
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--overlay-color);
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color var(--transition-duration) ease;
+  background: var(--mantle);
+  color: var(--text-color);
+}
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+/* Buttons */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 4px;
+  color: var(--bg-color);
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color var(--transition-duration) ease,
+    transform 0.2s ease;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 10px;
+}
+.btn:hover {
+  background-color: var(--accent-color);
+  transform: scale(1.02);
+}
+.btn-secondary {
+  background-color: var(--secondary-color);
+  margin-top: 20px;
+}
+.btn-secondary:hover {
+  background-color: var(--accent-color);
+}
+
+/* Cards for About Page */
+.about-container {
+  text-align: center;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin: 30px 0;
+}
+.card {
+  background: var(--surface0);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  transition: transform var(--transition-duration) ease,
+    box-shadow var(--transition-duration) ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.9);
+}
+.card img {
+  width: 80%;
+  height: 300px;
+  object-fit: cover;
+}
+.card-content {
+  padding: 15px;
+  text-align: center;
+}
+.card-content h3 {
+  margin: 10px 0;
+  color: var(--primary-color);
+}
+.card-content p {
+  font-size: 0.9em;
+  color: var(--subtext1);
+  margin-bottom: 15px;
+}
+.card-links a {
+  margin: 0 10px;
+  font-size: 1.4em;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+.card-links a:hover {
+  color: var(--accent-color);
+}
+
+/* Chart */
+.chart {
+  text-align: center;
+  margin: 20px 0;
+}
+.chart img {
+  max-width: 100%;
+  border: 1px solid var(--overlay-color);
+  border-radius: 4px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1px;
+  background: var(--mantle);
+  color: var(--primary-color);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+footer a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Loading Modal */
+.loading-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Spinner Styles */
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 8px solid var(--overlay-color);
+  border-top: 8px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .container {
+    margin: 20px;
+    padding: 20px;
+  }
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

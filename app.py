@@ -2,15 +2,11 @@ import os
 import pickle
 import json
 import logging
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from flask import Flask, flash, redirect, request, render_template, session, url_for
 from flask_assets import Environment, Bundle
 
 # For transformation pipeline (for non-pipeline models)
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
 
 logging.basicConfig(
     level=logging.INFO,

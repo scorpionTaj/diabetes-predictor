@@ -16,5 +16,23 @@
         "model": "Logistic Regression",
         "prediction": "Not Diabetic",
         "probability": 0.11519728990494378
+    },
+    {
+        "user_id": 1,
+        "username": "scorpion",
+        "timestamp": "2025-02-07T21:20:49.974173",
+        "inputs": {
+            "Pregnancies": "12",
+            "Glucose": "1",
+            "BloodPressure": "1",
+            "SkinThickness": "1",
+            "Insulin": "12",
+            "BMI": "12",
+            "DiabetesPedigreeFunction": "1",
+            "Age": "29"
+        },
+        "model": "Logistic Regression",
+        "prediction": "Not Diabetic",
+        "probability": 0.0562014990148541
     }
 ]

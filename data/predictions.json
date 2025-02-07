@@ -1,0 +1,20 @@
+[
+    {
+        "user_id": 1,
+        "username": "scorpion",
+        "timestamp": "2025-02-07T20:42:50.614166",
+        "inputs": {
+            "Pregnancies": "12",
+            "Glucose": "1",
+            "BloodPressure": "12",
+            "SkinThickness": "1",
+            "Insulin": "12",
+            "BMI": "15",
+            "DiabetesPedigreeFunction": "2",
+            "Age": "19"
+        },
+        "model": "Logistic Regression",
+        "prediction": "Not Diabetic",
+        "probability": 0.11519728990494378
+    }
+]

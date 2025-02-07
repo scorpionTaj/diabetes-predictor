@@ -1,5 +1,7 @@
 Flask
 Flask-Assets
+flask_login
+flask_sqlalchemy
 numpy
 pandas
 scikit-learn

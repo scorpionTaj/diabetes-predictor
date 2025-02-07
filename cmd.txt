@@ -1,0 +1,1 @@
+flask assets build && C:/ProgramData/anaconda3/python.exe "c:/Users/bourh/Desktop/Master SDIA/S01/PYTHON AVANCE POUR LA DATA SCIENCE/Mini Projet/Diabetes Prediction/app.py"

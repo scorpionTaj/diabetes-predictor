@@ -5,7 +5,7 @@ import logging
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from flask import Flask, request, render_template, session
+from flask import Flask, flash, redirect, request, render_template, session, url_for
 from flask_assets import Environment, Bundle
 
 # For transformation pipeline (for non-pipeline models)
@@ -180,6 +180,14 @@ def home():
 @app.route("/about")
 def about():
     return render_template("about.html")
+
+
+@app.route("/set_language")
+def set_language():
+    lang = request.args.get("lang", "en")
+    session["lang"] = lang
+    flash(f"Language set to {lang.upper()}", "success")
+    return redirect(request.referrer or url_for("home"))
 
 
 @app.route("/predict", methods=["POST"])

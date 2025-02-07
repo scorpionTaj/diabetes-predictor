@@ -387,3 +387,22 @@ body.light-mode footer a {
     gap: 10px;
   }
 }
+
+/* Tablet responsiveness (e.g., devices between 600px and 900px wide) */
+@media (min-width: 600px) and (max-width: 900px) {
+  .container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+  }
+  .navbar {
+    padding: 8px 15px;
+  }
+  .form-group input,
+  .form-group select {
+    font-size: 1.1em;
+  }
+  footer {
+    padding: 5px;
+  }
+}

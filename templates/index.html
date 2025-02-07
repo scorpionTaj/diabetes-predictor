@@ -74,6 +74,35 @@
                   ><i class="fas fa-info-circle"></i> About</a
                 >
               </li>
+              <!-- New language selection -->
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="languageDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  >Language</a
+                >
+                <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                  <li>
+                    <a class="dropdown-item" href="/set_language?lang=en"
+                      >English</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/set_language?lang=fr"
+                      >Français</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/set_language?lang=ar"
+                      >العربية</a
+                    >
+                  </li>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>
@@ -245,5 +274,26 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+Pn1F9cjPVBw7f0rV7TQK6bS5fN9I"
       crossorigin="anonymous"
     ></script>
+    <!-- Your custom JS -->
+    <script>
+      // Collapse the navbar on nav-link click (for mobile/tablet)
+      document.addEventListener("DOMContentLoaded", function () {
+        const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+        const navCollapse = document.getElementById("navbarNav");
+
+        navLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            // Check if the collapse element is currently shown
+            if (navCollapse.classList.contains("show")) {
+              // Use Bootstrap's collapse instance to hide it
+              const bsCollapse = new bootstrap.Collapse(navCollapse, {
+                toggle: false,
+              });
+              bsCollapse.hide();
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>

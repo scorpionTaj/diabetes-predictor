@@ -298,7 +298,6 @@ def logout():
 def set_language():
     lang = request.args.get("lang", "en")
     session["lang"] = lang
-    flash(f"Language set to {lang.upper()}", "success")
     return redirect(request.referrer or url_for("home"))
 
 

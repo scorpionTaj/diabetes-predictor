@@ -1,6 +1,6 @@
 # Diabetes Predictor
 
-A Flask web application that uses machine learning models to predict diabetes risk based on user input. The app features a modern, responsive design with smooth animations, Font Awesome icons, and an About page with developer cards.
+A Flask web application that uses machine learning models to predict diabetes risk based on user input. The app features a modern, responsive design with smooth animations, Font Awesome icons, Google Translate integration, and an About page showcasing the development team. The application now includes user authentication (login and sign-up) with SQLite for secure storage and session management.
 
 ---
 
@@ -18,6 +18,7 @@ A Flask web application that uses machine learning models to predict diabetes ri
   - [PWA Features](#pwa-features)
   - [Training and Models](#training-and-models)
   - [Front-End Improvements](#front-end-improvements)
+  - [User Authentication \& Localization](#user-authentication--localization)
   - [Developer Information](#developer-information)
   - [Troubleshooting](#troubleshooting)
   - [License](#license)
@@ -27,7 +28,7 @@ A Flask web application that uses machine learning models to predict diabetes ri
 
 ## Overview
 
-This application predicts whether a patient is diabetic based on several input features (such as glucose level, BMI, age, etc.). It supports multiple machine learning models, including logistic regression, SVM, decision trees, random forests, gradient boosting, and more. The app also provides an auto-select feature that picks the best model based on performance metrics.
+This application predicts whether a patient is diabetic based on several input features (such as glucose level, BMI, age, etc.). It supports multiple machine learning models—including logistic regression, SVM, decision trees, random forests, gradient boosting, and more—with an auto-select feature to pick the best-performing model. In addition, the app now allows users to register, log in, and log out. User data is stored securely in an SQLite database, and Google Translate is available on the login and sign-up pages to provide localization support.
 
 ---
 
@@ -37,12 +38,16 @@ This application predicts whether a patient is diabetic based on several input f
   Use any of the pre-trained models or auto-select the best-performing model.
 - **Modern UI:**  
   Responsive design with a modern look using CSS Grid, Flexbox, and smooth animations.
+- **User Authentication:**  
+  Secure login and sign-up pages with user credentials stored in an SQLite database using Flask-SQLAlchemy and Flask-Login.
+- **Google Translate Integration:**  
+  The login and sign-up pages include a Google Translate widget to allow users to change the page language.
 - **Developer Cards:**  
   An About page that showcases the development team with pictures, GitHub, and LinkedIn links.
 - **Detailed Logging:**  
   Logging for error handling and tracing using Python’s built-in logging module.
 - **Auto-Select Best Model:**  
-  Automatically select the best model based on stored metrics.
+  Automatically select the best model based on stored performance metrics.
 - **Interactive Charts:**  
   Display a confidence chart for the prediction result.
 
@@ -52,15 +57,15 @@ This application predicts whether a patient is diabetic based on several input f
 
 ```
 your_project/
-├── app.py                  # Main Flask application
-├── README.md               # Project documentation
+├── app.py                  # Main Flask application with authentication and prediction logic
+├── README.md               # Project documentation (this file)
 ├── models/
 │   ├── preprocessor.pkl    # Fitted preprocessor from training
 │   ├── metrics.json        # Model performance metrics
 │   ├── <model>.pkl         # Pickled machine learning models
 │   └── ...                 # Additional model files
 ├── static/
-│   ├── app.js              # JavaScript for theme switching, spinner, PWA, and transitions
+│   ├── app.js              # JavaScript for theme switching, spinner, PWA, transitions, etc.
 │   ├── style.css           # Main CSS file (Catppuccin Mocha Mauve palette with theme controls)
 │   ├── manifest.json       # PWA manifest file
 │   ├── sw.js               # Service Worker for PWA features
@@ -70,9 +75,14 @@ your_project/
 │       └── dev3.jpg
 ├── templates/
 │   ├── index.html          # Home page with input form and theme controls
-│   ├── about.html          # About page with developer cards
+│   ├── about.html          # About page with developer cards and corrected navbar
 │   ├── result.html         # Prediction result page
-│   └── error.html          # Error display page
+│   ├── error.html          # Error display page
+│   ├── login.html          # Login page with Google Translate integration
+│   └── register.html       # Registration page with Google Translate integration
+├── data/
+│   ├── users.db            # SQLite database for user authentication
+│   └── predictions.json    # JSON file for logging user predictions
 └── requirements.txt        # List of Python dependencies
 
 ```
@@ -123,19 +133,26 @@ your_project/
 
    Choose a model from the dropdown or select "Auto-select Best Model" to let the app choose the best model based on accuracy.
 
-3. **Theme Customization:**
+3. **User Authentication:**
 
-   Use the theme controls (located in the header) to switch between dark and light modes .
+   - **Sign Up:**  
+     Create a new account using the registration page.
+   - **Login:**  
+     Log in with your credentials. Once logged in, your username is displayed on the navbar and you can access prediction functionalities.
+   - **Logout:**  
+     Use the logout link in the navbar to end your session.
 
-4. **Submit and Get Prediction:**
+4. **Theme Customization:**
+
+   Use the theme controls (located in the header) to switch between dark and light modes.
+
+5. **Submit and Get Prediction:**
 
    Click "Predict" to submit the form. A loading spinner will display during processing, and then you’ll see the prediction result along with a confidence chart.
 
-5. **Navigation:**
+6. **Navigation:**
 
-   Use the navigation bar to switch between the home page and the About page to view developer information.
-
----
+   Use the navigation bar to switch between the home page, About page, and authentication pages.
 
 ---
 
@@ -194,6 +211,15 @@ your_project/
 
 ---
 
+## User Authentication & Localization
+
+- **User Authentication:**  
+  The application now includes secure login and sign-up pages. User credentials are stored in an SQLite database (`data/users.db`) using Flask-SQLAlchemy, and Flask-Login manages session handling.
+- **Google Translate:**  
+  The login and registration pages include a Google Translate widget, allowing users to switch the page language (e.g., English, French, Arabic).
+
+---
+
 ## Developer Information
 
 The About page displays interactive developer cards with:
@@ -212,6 +238,8 @@ The About page displays interactive developer cards with:
   If the theme does not change, ensure JavaScript is enabled and that `app.js` is properly linked.
 - **PWA Issues:**  
   Verify that `manifest.json` and `sw.js` are in the correct directories and that the service worker is registering.
+- **Authentication Issues:**  
+  Check that the SQLite database is created in the `data/` directory and that your dependencies are up-to-date.
 - **General Errors:**  
   Check the browser console and `app.log` for detailed error messages.
 
@@ -229,7 +257,7 @@ The About page displays interactive developer cards with:
   The project now uses Flask-Assets for optimized asset delivery and includes PWA features (manifest and service worker) for offline support and installation.
 - **Smooth Transitions & Spinner:**  
   Smooth page transitions and a loading spinner/modal improve user experience during navigation and form submission.
-- **Theme Customization:**  
-  Users can toggle between dark/light modes , with preferences saved across sessions.
+- **User Authentication & Localization:**  
+  Secure login and registration via SQLite and Google Translate integration on authentication pages enhance usability and accessibility.
 - **Documentation:**  
   This README provides a comprehensive guide to the project, including setup, usage, and troubleshooting.

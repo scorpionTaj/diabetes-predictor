@@ -346,13 +346,11 @@ button {
 ================================================== */
 footer {
   text-align: center;
-  padding: 2px;
+  padding: 10px 0;
   background: var(--mantle);
   color: var(--primary-color);
-  position: fixed;
-  bottom: 0;
-  width: 100%;
 }
+
 footer a {
   color: var(--accent-color);
   text-decoration: none;

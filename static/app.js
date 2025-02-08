@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // Card hover effect
   const cards = document.querySelectorAll(".card");
   cards.forEach((card) => {
     card.addEventListener("mouseenter", () => {
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Service Worker registration
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
     navigator.serviceWorker.register("/static/sw.js").then(
@@ -58,6 +60,7 @@ if ("serviceWorker" in navigator) {
   });
 }
 
+// Ripple effect on buttons
 document.querySelectorAll(".btn").forEach((btn) => {
   btn.addEventListener("click", function (e) {
     const rect = btn.getBoundingClientRect();
@@ -68,3 +71,47 @@ document.querySelectorAll(".btn").forEach((btn) => {
     btn.style.setProperty("--ripple-y", y + "px");
   });
 });
+
+function attachEventListeners() {
+  const navbarToggler = document.querySelector(".navbar-toggler");
+  const navCollapse = document.getElementById("navbarNav");
+
+  if (navbarToggler) {
+    navbarToggler.addEventListener("click", function () {
+      // Retrieve or create a Collapse instance for the target element.
+      let collapseInstance = bootstrap.Collapse.getInstance(navCollapse);
+      if (!collapseInstance) {
+        collapseInstance = new bootstrap.Collapse(navCollapse, {
+          toggle: true,
+        });
+      } else {
+        collapseInstance.toggle();
+      }
+    });
+  } else {
+  }
+
+  // Hide the navbar collapse when a nav-link is clicked
+  const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (navCollapse.classList.contains("show")) {
+        let bsCollapse = bootstrap.Collapse.getInstance(navCollapse);
+        if (!bsCollapse) {
+          bsCollapse = new bootstrap.Collapse(navCollapse, {
+            toggle: false,
+          });
+        }
+        bsCollapse.hide();
+      }
+    });
+  });
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", () => {
+    attachEventListeners();
+  });
+} else {
+  attachEventListeners();
+}

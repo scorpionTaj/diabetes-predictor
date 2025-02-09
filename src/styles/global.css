@@ -1,0 +1,29 @@
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.chart-container {
+  max-width: 300px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.dark-mode {
+  background-color: #1f2937;
+  color: #f9fafb;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+}

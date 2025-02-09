@@ -280,7 +280,7 @@ def logout():
     return jsonify({"message": "Logged out successfully."})
 
 
-# New endpoint to return current user's info
+# New endpoint to return current user's info (updated for graceful unauthenticated responses)
 @app.route("/api/current_user", methods=["GET"])
 def current_user_info():
     if current_user.is_authenticated:
@@ -288,9 +288,10 @@ def current_user_info():
             {
                 "id": current_user.id,
                 "username": current_user.username,
+                "isAuthenticated": True,
             }
         )
-    return jsonify({"error": "Not authenticated"}), 401
+    return jsonify({"isAuthenticated": False})
 
 
 # New endpoint for changing password

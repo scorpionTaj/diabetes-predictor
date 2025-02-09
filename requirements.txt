@@ -5,4 +5,4 @@ Flask-SQLAlchemy
 pandas
 joblib
 gunicorn
-sklearn
+scikit-learn

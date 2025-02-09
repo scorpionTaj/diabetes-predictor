@@ -1,45 +1,85 @@
-# Getting Started with Create React App
+# Diabetes Predictor
+
+This project is a web application for predicting diabetes risk using state-of-the-art machine learning techniques. It consists of a React frontend and a Flask backend.
+
+---
+
+## Frontend
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
-In the project directory, you can run:
+In the React project directory, you can run:
 
-### `npm start`
+- ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- ### `npm test`
 
-### `npm test`
+  Launches the test runner in the interactive watch mode.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- ### `npm run build`
 
-### `npm run build`
+  Builds the app for production to the `build` folder.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- ### `npm run eject`
+  Exposes configuration files. **Note:** This is a one-way operation.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Backend
 
-### `npm run eject`
+The Flask backend manages user authentication and prediction API endpoints. It utilizes SQLite, Flask-Login, and machine learning models stored in the `models` directory.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### How to Run the Backend
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Create a virtual environment if needed.
+2. Install the dependencies (e.g., `pip install -r requirements.txt`).
+3. Run the application:
+   ```bash
+   python app.py
+   ```
+   The backend will run on [http://localhost:5000](http://localhost:5000) by default.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+---
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## API Endpoints
 
-## Learn More
+Below are the main API endpoints provided by the backend:
+
+- **User Authentication**
+
+  - `POST /api/register` - Register a new user.
+  - `POST /api/login` - Log in a user.
+  - `POST /api/logout` - Log out the current user.
+  - `GET /api/current_user` - Get details of the logged-in user.
+  - `POST /api/change_password` - Change the current user's password.
+
+- **Prediction**
+
+  - `POST /api/predict` - Submit input data to get a diabetes prediction.
+  - `GET /api/models` - Retrieve available model names (including auto-select option "best").
+  - `GET /api/predictions` - Retrieve the prediction history of the current user.
+  - `GET /api/prediction_stats` - Get statistics of predictions.
+  - `GET /api/feature_importance` - Get feature importance scores from the models.
+
+- **Health Check**
+  - `GET /api/health` - Check if the backend service is running.
+  - `GET /api/model_metrics` - Retrieve model performance metrics.
+
+---
+
+## Additional Information
+
+- **Logging:** The backend logs requests and prediction activities.
+- **CORS:** Configured to support credentials.
+- **Database:** Uses SQLite database stored in the `data` folder.
+
+For more details, please refer to the source code and inline comments.
+
+# Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 

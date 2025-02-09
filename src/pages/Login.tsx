@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaInfoCircle } from "react-icons/fa";
+import axios from "axios";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -14,23 +15,23 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include", // ensure session cookie is stored
-        body: JSON.stringify({ username, password }),
-      });
-      const data = await response.json();
-      if (response.ok) {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/login`,
+        { username, password },
+        { withCredentials: true }
+      );
+      if (response.data.user?.isAuthenticated) {
         setMessage("Login successful!");
         setIsError(false);
-        setTimeout(() => navigate("/"), 1500);
+        window.location.href = "http://localhost:3000/"; // redirect directly to home
       } else {
-        setMessage(data.error || "Login failed");
+        setMessage(response.data.error || "Login failed");
         setIsError(true);
       }
-    } catch (error) {
-      setMessage("An error occurred during login.");
+    } catch (err: any) {
+      setMessage(
+        err.response?.data?.error || "An error occurred during login."
+      );
       setIsError(true);
     }
   };

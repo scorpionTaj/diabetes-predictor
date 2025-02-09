@@ -3,7 +3,8 @@ import json
 import pickle
 import joblib
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timedelta
+from sqlalchemy.pool import StaticPool  # added import
 
 import pandas as pd
 from flask import Flask, request, jsonify, session, redirect, url_for
@@ -57,6 +58,11 @@ os.makedirs(data_dir, exist_ok=True)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
     data_dir, "users.db"
 )
+# updated engine options to mitigate SQLite lock issues
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+    "connect_args": {"check_same_thread": False, "timeout": 15},
+    "poolclass": StaticPool,  # use a static pool to reduce connection concurrency issues
+}
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
@@ -94,7 +100,7 @@ with app.app_context():
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return db.session.get(User, int(user_id))
 
 
 # Add this unauthorized handler to return JSON responses
@@ -231,53 +237,81 @@ def auto_select_model(metrics_file, models_dict):
 @app.route("/api/register", methods=["POST"])
 def register():
     data = request.get_json()
-
     username = data.get("username")
     password = data.get("password")
     if not username or not password:
-        return jsonify({"error": "Username and password are required."}), 400
-
+        return (
+            jsonify(
+                {"error": "Username and password are required.", "registered": False}
+            ),
+            400,
+        )
     if User.query.filter_by(username=username).first():
-        return jsonify({"error": "Username already taken."}), 400
-
-    new_user = User(
-        username=username,
-        password_hash=generate_password_hash(password),
-    )
+        return jsonify({"error": "Username already taken.", "registered": False}), 409
+    new_user = User(username=username, password_hash=generate_password_hash(password))
     db.session.add(new_user)
     db.session.commit()
-    return jsonify({"message": "Registration successful."}), 201
+    login_user(new_user)  # Auto login upon successful registration
+    return (
+        jsonify(
+            {
+                "message": "Registration successful.",
+                "registered": True,  # added property to indicate successful registration
+                "user": {
+                    "id": new_user.id,
+                    "username": new_user.username,
+                    "isAuthenticated": True,
+                },
+            }
+        ),
+        201,
+    )
 
 
 @app.route("/api/login", methods=["POST"])
 def login():
     data = request.get_json()
     if not data:
-        return jsonify({"error": "Missing JSON body"}), 400
-
+        return (
+            jsonify({"error": "Missing JSON body"}),
+            400,
+        )  # changed to 400 for missing data
     username = data.get("username")
     password = data.get("password")
     if not username or not password:
-        return jsonify({"error": "Username and password are required."}), 400
-
+        return (
+            jsonify({"error": "Username and password are required."}),
+            400,
+        )
     user = User.query.filter_by(username=username).first()
     if user and user.check_password(password):
         login_user(user)
         return jsonify(
             {
                 "message": "Logged in successfully.",
-                "user": {"id": user.id, "username": user.username},
+                "user": {
+                    "id": user.id,
+                    "username": user.username,
+                    "isAuthenticated": True,
+                },
             }
         )
     else:
-        return jsonify({"error": "Invalid username or password."}), 401
+        # User not found or password invalid
+        return (
+            jsonify({"error": "User not found or invalid username/password."}),
+            404,
+        )  # changed status to 404
 
 
 @app.route("/api/logout", methods=["POST"])
 @login_required
 def logout():
     logout_user()
-    return jsonify({"message": "Logged out successfully."})
+    session.clear()  # Clear session to avoid auto-login
+    resp = jsonify({"message": "Logged out successfully."})
+    resp.delete_cookie("session")  # Ensure session cookie is removed on client
+    return resp
 
 
 # New endpoint to return current user's info (updated for graceful unauthenticated responses)
@@ -440,7 +474,7 @@ def predict():
         log_entry = {
             "user_id": current_user.id,
             "username": current_user.username,
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "inputs": {feature: data.get(feature) for feature in raw_features},
             "model": selected_model_name,
             "prediction": result_text,
@@ -448,7 +482,10 @@ def predict():
         }
         if os.path.exists(PREDICTIONS_FILE):
             with open(PREDICTIONS_FILE, "r") as f:
-                predictions_log = json.load(f)
+                try:
+                    predictions_log = json.load(f)
+                except json.JSONDecodeError:
+                    predictions_log = []
         else:
             predictions_log = []
         predictions_log.append(log_entry)

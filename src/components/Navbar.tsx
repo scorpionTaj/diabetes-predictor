@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { LogOut, X } from "lucide-react";
 import {
@@ -44,7 +44,14 @@ const Navbar: React.FC = () => {
       .get(`${process.env.REACT_APP_API_URL}/current_user`, {
         withCredentials: true,
       })
-      .then((response) => setCurrentUser(response.data))
+      .then((response) => {
+        // Only set user if authenticated flag is true
+        if (response.data.isAuthenticated) {
+          setCurrentUser(response.data);
+        } else {
+          setCurrentUser(null);
+        }
+      })
       .catch(() => setCurrentUser(null));
   }, [location]); // re-fetch on route change
 
@@ -86,7 +93,7 @@ const Navbar: React.FC = () => {
 
       {/* Desktop links */}
       <div className="hidden md:flex items-center space-x-4 ml-auto">
-        {currentUser ? (
+        {currentUser && currentUser.isAuthenticated ? (
           <>
             <Link
               to="/"
@@ -181,43 +188,43 @@ const Navbar: React.FC = () => {
           >
             <X className="h-6 w-6" />
           </button>
-          <Link
-            to="/"
-            className="text-white flex items-center"
-            onClick={closeMobileMenu}
-          >
-            <FaHome className="mr-1" /> Home
-          </Link>
-          <Link
-            to="/about"
-            className="text-white flex items-center"
-            onClick={closeMobileMenu}
-          >
-            <FaInfoCircle className="mr-1" /> About
-          </Link>
-          <Link
-            to="/visualizations"
-            className="text-white flex items-center"
-            onClick={closeMobileMenu}
-          >
-            <FaChartBar className="mr-1" /> Visualizations
-          </Link>
-          <Link
-            to="/contact"
-            className="text-white flex items-center"
-            onClick={closeMobileMenu}
-          >
-            <FaEnvelope className="mr-1" /> Contact Us
-          </Link>
-          <Link
-            to="/resources"
-            className="text-white flex items-center"
-            onClick={closeMobileMenu}
-          >
-            <FaBook className="mr-1" /> Resources
-          </Link>
-          {currentUser ? (
+          {currentUser && currentUser.isAuthenticated ? (
             <>
+              <Link
+                to="/"
+                className="text-white flex items-center"
+                onClick={closeMobileMenu}
+              >
+                <FaHome className="mr-1" /> Home
+              </Link>
+              <Link
+                to="/about"
+                className="text-white flex items-center"
+                onClick={closeMobileMenu}
+              >
+                <FaInfoCircle className="mr-1" /> About
+              </Link>
+              <Link
+                to="/visualizations"
+                className="text-white flex items-center"
+                onClick={closeMobileMenu}
+              >
+                <FaChartBar className="mr-1" /> Visualizations
+              </Link>
+              <Link
+                to="/contact"
+                className="text-white flex items-center"
+                onClick={closeMobileMenu}
+              >
+                <FaEnvelope className="mr-1" /> Contact Us
+              </Link>
+              <Link
+                to="/resources"
+                className="text-white flex items-center"
+                onClick={closeMobileMenu}
+              >
+                <FaBook className="mr-1" /> Resources
+              </Link>
               <Link
                 to="/profile"
                 className="text-white flex items-center"
@@ -263,4 +270,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default memo(Navbar);
+export default Navbar;

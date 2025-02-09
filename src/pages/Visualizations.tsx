@@ -58,9 +58,12 @@ const Visualizations: React.FC = () => {
           `${process.env.REACT_APP_API_URL}/predictions`,
           { withCredentials: true }
         );
-        setPredictions(response.data);
+        const data = response.data;
+        // Ensure that predictions is an array before setting state
+        setPredictions(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error("Error fetching predictions:", error);
+        setPredictions([]);
       }
     };
 

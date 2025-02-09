@@ -100,7 +100,7 @@ def load_user(user_id):
 # Add this unauthorized handler to return JSON responses
 @login_manager.unauthorized_handler
 def unauthorized_callback():
-    return jsonify({"error": "Unauthorized"}), 401
+    return jsonify({"isAuthenticated": False, "error": "Not logged in"}), 200
 
 
 # -------------------------------

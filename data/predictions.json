@@ -16,5 +16,23 @@
         "model": "Calibrated Svc",
         "prediction": "Diabetic",
         "probability": 0.5434296809816832
+    },
+    {
+        "user_id": 1,
+        "username": "scorpion",
+        "timestamp": "2025-02-09T21:20:41.296563+00:00",
+        "inputs": {
+            "Pregnancies": "5",
+            "Glucose": "1",
+            "BloodPressure": "1",
+            "SkinThickness": "1",
+            "Insulin": "1",
+            "BMI": "13",
+            "DiabetesPedigreeFunction": "2.43",
+            "Age": "30"
+        },
+        "model": "Logistic Regression",
+        "prediction": "Not Diabetic",
+        "probability": 0.05592724204491438
     }
 ]

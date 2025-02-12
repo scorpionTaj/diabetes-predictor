@@ -4,7 +4,7 @@ import pickle
 import joblib
 import logging
 from datetime import datetime, timezone, timedelta
-from sqlalchemy.pool import StaticPool  # added import
+from sqlalchemy.pool import StaticPool
 
 import pandas as pd
 from flask import Flask, request, jsonify, session, redirect, url_for

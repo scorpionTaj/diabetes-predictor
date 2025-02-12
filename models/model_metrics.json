@@ -1,44 +1,44 @@
 {
-  "Logistic Regression": {
-    "Accuracy": 85.71,
-    "Precision": 76.67,
-    "Recall": 85.19,
-    "F1 Score": 80.7
-  },
-  "SVC": {
-    "Accuracy": 85.71,
-    "Precision": 82.0,
-    "Recall": 75.93,
-    "F1 Score": 78.85
-  },
-  "Decision Tree": {
-    "Accuracy": 35.06,
-    "Precision": 35.06,
-    "Recall": 100.0,
-    "F1 Score": 51.92
-  },
-  "KNN": {
-    "Accuracy": 35.06,
-    "Precision": 35.06,
-    "Recall": 100.0,
-    "F1 Score": 51.92
-  },
-  "Random Forest": {
-    "Accuracy": 35.06,
-    "Precision": 35.06,
-    "Recall": 100.0,
-    "F1 Score": 51.92
-  },
-  "Gradient Boosting": {
-    "Accuracy": 35.06,
-    "Precision": 35.06,
-    "Recall": 100.0,
-    "F1 Score": 51.92
-  },
-  "XGBoost": {
-    "Accuracy": 35.06,
-    "Precision": 35.06,
-    "Recall": 100.0,
-    "F1 Score": 51.92
-  }
+    "SVC": {
+        "Accuracy": 91.48,
+        "Precision": 89.56,
+        "Recall": 87.68,
+        "F1 Score": 88.61
+    },
+    "Logistic Regression": {
+        "Accuracy": 88.04,
+        "Precision": 84.43,
+        "Recall": 83.8,
+        "F1 Score": 84.11
+    },
+    "Decision Tree": {
+        "Accuracy": 37.79,
+        "Precision": 37.79,
+        "Recall": 100.0,
+        "F1 Score": 54.85
+    },
+    "KNN": {
+        "Accuracy": 37.79,
+        "Precision": 37.79,
+        "Recall": 100.0,
+        "F1 Score": 54.85
+    },
+    "Random Forest": {
+        "Accuracy": 37.79,
+        "Precision": 37.79,
+        "Recall": 100.0,
+        "F1 Score": 54.85
+    },
+    "Gradient Boosting": {
+        "Accuracy": 37.79,
+        "Precision": 37.79,
+        "Recall": 100.0,
+        "F1 Score": 54.85
+    },
+    "XGBoost": {
+        "Accuracy": 37.79,
+        "Precision": 37.79,
+        "Recall": 100.0,
+        "F1 Score": 54.85
+    }
 }

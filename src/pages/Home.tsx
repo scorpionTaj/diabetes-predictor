@@ -14,7 +14,6 @@ const Home: React.FC = () => {
     id: number;
     username: string;
   } | null>(null);
-  const [photo, setPhoto] = useState<File | null>(null);
 
   // Check login using API (which uses SQLite via Flask-Login)
   useEffect(() => {
@@ -81,12 +80,6 @@ const Home: React.FC = () => {
     }
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setPhoto(e.target.files[0]);
-    }
-  };
-
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
     Object.entries(formData).forEach(([key, value]) => {
@@ -106,9 +99,6 @@ const Home: React.FC = () => {
       Object.entries(formData).forEach(([key, value]) => {
         formDataToSend.append(key, value);
       });
-      if (photo) {
-        formDataToSend.append("photo", photo);
-      }
       try {
         const response = await fetch(
           `${process.env.REACT_APP_API_URL}/predict`,
